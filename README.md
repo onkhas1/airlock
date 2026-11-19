@@ -6,6 +6,37 @@
 
 <p align="center"><a href="#english">English</a> · <a href="#установка">Установка</a> · <a href="#как-это-работает">Как работает</a> · <a href="#вопросы">Вопросы</a></p>
 
+## Установка
+
+Нужен Mac с macOS 14 или новее. Займёт минуту.
+
+1. Открой **Терминал**: нажми ⌘ + Пробел, напиши «Терминал» и нажми Enter.
+2. Скопируй команду ниже, вставь в Терминал и нажми Enter:
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/onkhas1/airlock/main/install.sh | sh
+```
+
+3. Готово: Airlock откроется сам, а его значок появится в строке меню справа вверху. Окно приветствия подскажет, что делать дальше.
+
+<details>
+<summary><b>Другие способы: Homebrew или вручную</b></summary>
+
+**Через Homebrew.** Первая команда один раз разрешает Homebrew ставить Airlock из стороннего источника:
+
+```sh
+brew trust --cask onkhas1/tap/airlock
+brew install onkhas1/tap/airlock
+```
+
+Обновление: `brew upgrade airlock`. Airlock сам перезапустится уже новой версией.
+
+**Вручную:** скачай `Airlock-<версия>.zip` из [Releases](https://github.com/onkhas1/airlock/releases), распакуй и перетащи Airlock в «Программы». При первом открытии macOS скажет, что не может проверить разработчика (Airlock бесплатный и не подписан платным сертификатом Apple). Тогда открой «Системные настройки» → «Конфиденциальность и безопасность» и внизу нажми «Всё равно открыть». Установка командой выше и через Homebrew делает это сама.
+
+</details>
+
+**Обновить** — запусти ту же команду ещё раз. **Удалить** — в Airlock выключи «Запускать вместе с системой», закрой его и перетащи из «Программ» в корзину.
+
 <p align="center"><img src="docs/home.png" width="760" alt="Главное окно Airlock"></p>
 
 ## Зачем
@@ -19,33 +50,6 @@ VPN рвётся постоянно: после сна, при смене Wi-Fi,
 - **Можно убедиться, что работает.** Кнопка «Проверить защиту» замораживает тестовую программу, отпускает её и показывает, что видит каждый сервис.
 
 <p align="center"><img src="docs/menu.png" width="380" alt="Панель в строке меню"></p>
-
-## Установка
-
-Нужен macOS 14 или новее.
-
-**Через Homebrew** (проще всего):
-
-```sh
-brew install onkhas1/tap/airlock
-```
-
-**Одной командой без Homebrew:**
-
-```sh
-curl -fsSL https://raw.githubusercontent.com/onkhas1/airlock/main/install.sh | sh
-```
-
-**Вручную:** скачай `Airlock-<версия>.zip` из [Releases](https://github.com/onkhas1/airlock/releases), распакуй и перетащи Airlock в «Программы».
-
-### Первый запуск при ручной установке
-
-Airlock бесплатный и не подписан платным сертификатом Apple, поэтому при первом открытии скачанного вручную архива macOS скажет, что не может проверить разработчика. Один раз сделай так:
-
-1. Открой «Системные настройки» → «Конфиденциальность и безопасность».
-2. Внизу, рядом с сообщением про Airlock, нажми «Всё равно открыть».
-
-Или в Терминале: `xattr -dr com.apple.quarantine /Applications/Airlock.app`. Установка через Homebrew и командой выше делает это сама.
 
 ## Как это работает
 
@@ -73,7 +77,7 @@ Airlock замораживает программы за доли миллисе
 Нет. Airlock останавливает только твои собственные программы.
 
 **Как удалить?**
-`brew uninstall --zap airlock` или выключи «Запускать вместе с системой», закрой Airlock и удали его из «Программ». Настройки лежат в `~/Library/Application Support/Airlock`.
+Если ставил через Homebrew: `brew uninstall --zap airlock`. Иначе выключи «Запускать вместе с системой», закрой Airlock и удали его из «Программ». Настройки лежат в `~/Library/Application Support/Airlock`.
 
 ## Поддержать
 
@@ -87,6 +91,14 @@ Airlock бесплатный и без рекламы. Если он тебе п
 
 Airlock pauses Claude, ChatGPT, Codex and Cursor when your VPN drops or a service sees you in the wrong country. Once the right country is back, they continue where they left off.
 
+**Install (macOS 14+):** open Terminal (⌘ + Space, type "Terminal"), paste this and press Enter:
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/onkhas1/airlock/main/install.sh | sh
+```
+
+Airlock opens on its own and its icon appears in the menu bar. With Homebrew: `brew trust --cask onkhas1/tap/airlock && brew install onkhas1/tap/airlock`.
+
 <p align="center"><img src="docs/home-en.png" width="760" alt="Airlock main window"></p>
 
 - **Asks the service itself.** Airlock checks `claude.ai/cdn-cgi/trace`, `chatgpt.com/cdn-cgi/trace` and so on, so it sees exactly what the service sees, even when your VPN routes some sites directly.
@@ -95,7 +107,7 @@ Airlock pauses Claude, ChatGPT, Codex and Cursor when your VPN drops or a servic
 - **No accounts, no tracking.** No sign-up, telemetry or author servers. Just a country check every 3 seconds.
 - **Self-check.** "Run check" pauses a test process, resumes it and shows what each service sees.
 
-**Install:** `brew install onkhas1/tap/airlock`, or `curl -fsSL https://raw.githubusercontent.com/onkhas1/airlock/main/install.sh | sh`, or download the zip from Releases. Requires macOS 14+. For a manual download, open it once via System Settings → Privacy & Security → "Open Anyway", since Airlock is free and not signed with a paid Apple certificate.
+**Manual download:** get the zip from Releases. On first launch, open it via System Settings → Privacy & Security → "Open Anyway", since Airlock is free and not signed with a paid Apple certificate.
 
 **Is it a guarantee?** Airlock pauses apps within a fraction of a millisecond after macOS reports a change, but anything already sent can't be recalled. Turn on your VPN client's kill switch as well for full coverage.
 
